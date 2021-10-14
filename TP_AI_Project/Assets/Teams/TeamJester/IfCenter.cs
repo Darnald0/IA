@@ -1,7 +1,4 @@
 using BehaviorDesigner.Runtime.Tasks;
-using System.Collections;
-using System.Collections.Generic;
-using TeamJester;
 using UnityEngine;
 
 namespace TeamJester
