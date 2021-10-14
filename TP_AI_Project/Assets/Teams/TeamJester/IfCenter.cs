@@ -9,6 +9,11 @@ namespace TeamJester
         public JesterController controller;
         private Vector2 shipPos;
 
+        public override void OnStart()
+        {
+            controller = GetComponent<JesterController>();
+        }
+
         public override TaskStatus OnUpdate()
         {
 

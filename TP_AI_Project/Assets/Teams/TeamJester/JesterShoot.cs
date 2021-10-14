@@ -7,6 +7,12 @@ namespace TeamJester
     public class JesterShoot : Action
     {
         public JesterController controller;
+
+        public override void OnStart()
+        {
+            controller = GetComponent<JesterController>();
+        }
+
         public override TaskStatus OnUpdate()
         {
             if(controller._spaceShip.Energy >= controller._spaceShip.ShootEnergyCost)

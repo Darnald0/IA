@@ -30,9 +30,7 @@ namespace TeamJester {
 			_data = data;
             _otherSpaceShip = data.GetSpaceShipForOwner(1 - spaceship.Owner);
 
-			nextInputData.dropMine = false;
-			nextInputData.fireShockwave = false;
-			nextInputData.shoot = false;
+
 
             tree.SetVariable("DistanceToEnmy", (SharedFloat)Vector2.Distance(spaceship.Position, _otherSpaceShip.Position));
             tree.SetVariable("GameTime", (SharedInt)data.timeLeft);
@@ -93,6 +91,10 @@ namespace TeamJester {
             {
                 tree.SetVariableValue("PositionOnScreen", 1);
             }
+
+            //nextInputData.dropMine = false;
+            //nextInputData.fireShockwave = false;
+            //nextInputData.shoot = false;
 
             return nextInputData;
 		}
