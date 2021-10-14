@@ -7,6 +7,8 @@ using BehaviorDesigner.Runtime;
 
 namespace TeamJester
 {
+    [TaskCategory("Jester")]
+    [TaskDescription("Modify Thrust")]
     public class ManageThrust : Action
     {
         public JesterController controller;
