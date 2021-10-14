@@ -22,13 +22,20 @@ namespace TeamJester
             base.OnAwake();
             controller = GetComponent<JesterController>();
         }
-        void Start()
+
+        public override void OnStart()
         {
-            
-            
+            RayLook();
         }
-        void Update()
+
+        public override TaskStatus OnUpdate()
         {
+            return TaskStatus.Success;
+        }
+     
+        void RayLook()
+        {
+            Debug.Log("j'esite");
             if (controller == null || controller._spaceShip == null) return;
             for (int i = 0; i < nb_Raycast; i++)
             {
@@ -40,6 +47,7 @@ namespace TeamJester
                 raycastHit2DsRight[i] = Physics2D.Raycast(controller._spaceShip.PositionWorld, dir, RaycastLenght, layerMask);
 
             }
+
 
             for (int i = 0; i < nb_Raycast; i++)
             {
@@ -66,7 +74,7 @@ namespace TeamJester
                     {
                         controller.tree.SetVariable("Target", (SharedVector2)controller._spaceShip.Velocity.normalized);
                     }
-                    else if(raycastHit2DsLeft[i].collider == null && i != 0)
+                    else if(raycastHit2DsRight[i].collider == null && i != 0)
                     {
                         Vector2 dirleft = controller._spaceShip.Velocity.normalized;
                         Quaternion Rotleft = Quaternion.Euler(0, 0, -(max_angle * i / (nb_Raycast - 1)));
@@ -87,6 +95,13 @@ namespace TeamJester
                     if (raycastHit2DsRight[0].collider == null && raycastHit2DsLeft[0].collider == null)
                     {
                         controller.tree.SetVariable("Target", (SharedVector2)dir);
+                    }
+                    else if (raycastHit2DsLeft[i].collider == null && i != 0)
+                    {
+                        Vector2 dirRight = controller._spaceShip.Velocity.normalized;
+                        Quaternion RotRight = Quaternion.Euler(0, 0, max_angle * i / (nb_Raycast - 1));
+                        dirRight = RotRight * dirRight;
+                        controller.tree.SetVariable("Target", (SharedVector2)dirRight);
                     }
                 }
 
