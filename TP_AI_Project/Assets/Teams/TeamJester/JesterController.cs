@@ -5,6 +5,7 @@ using DoNotModify;
 
 namespace TeamJester {
 
+
 	public class JesterController : BaseSpaceShipController
 	{
 		public static JesterController instance;
@@ -24,10 +25,15 @@ namespace TeamJester {
 
             SpaceShipView otherSpaceship = data.GetSpaceShipForOwner(1 - spaceship.Owner);
 			//float thrust = 1.0f;
-   //         float targetOrient = spaceship.Orientation;
-   //         bool needShoot = AimingHelpers.CanHit(spaceship, otherSpaceship.Position, otherSpaceship.Velocity, 0.15f);
+			//         float targetOrient = spaceship.Orientation;
+			//         bool needShoot = AimingHelpers.CanHit(spaceship, otherSpaceship.Position, otherSpaceship.Velocity, 0.15f);
 
-			return nextInputData;
+			InputData input = nextInputData;
+			nextInputData.dropMine = false;
+			nextInputData.fireShockwave = false;
+			nextInputData.shoot = false;
+
+			return input;
 		}
 	}
 }

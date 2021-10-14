@@ -9,27 +9,21 @@ namespace TeamJester
 {
     public class JesterShoot : Action
     {
-        public JesterController controller;
-        GameData gd;
-        SpaceShipView ss;
-        
-        public override void OnAwake()
-        {
-            gd = controller.gameData;
-            ss = controller.spaceShip;
-        }
+
         public override TaskStatus OnUpdate()
-        {   
-            if(controller.spaceShip.Energy >= controller.spaceShip.ShootEnergyCost)
+        {
+            if(JesterController.instance._spaceShip.Energy >= JesterController.instance._spaceShip.ShootEnergyCost)
             {
-                //InputData inputData = controller.UpdateInput(controller.spaceShip, GameManager.Instance.GetGameData());
-                controller.spaceShip.Shoot();
+
+                JesterController.instance.nextInputData.shoot = true;
+                //InputData inputData = controller.UpdateInput(JesterController.instance._spaceShip, GameManager.Instance.GetGameData());
+                //JesterController.instance._spaceShip.Shoot();
 
                 //InputData i = new InputData(1.0f, targetOrient, true, false, false);
-                if (controller.UpdateInput(ss, gd).shoot)
-                {
+                //if (controller.UpdateInput(ss, gd).shoot)
+                //{
 
-                }
+                //}
                 return TaskStatus.Success;
             }
             return TaskStatus.Running;
