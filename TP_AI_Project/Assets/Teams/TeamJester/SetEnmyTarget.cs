@@ -7,6 +7,8 @@ using BehaviorDesigner.Runtime;
 
 namespace TeamJester
 {
+    [TaskCategory("Jester")]
+    [TaskDescription("Set Target to Enemy")]
     public class SetEnmyTarget : Action
     {
         public JesterController controller;

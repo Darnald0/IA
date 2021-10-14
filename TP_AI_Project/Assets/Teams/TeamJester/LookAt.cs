@@ -7,6 +7,8 @@ using BehaviorDesigner.Runtime;
 
 namespace TeamJester
 {
+    [TaskCategory("Jester")]
+    [TaskDescription("Rotate IA")]
     public class LookAt : Action
     {
         public SharedFloat distanceStop;

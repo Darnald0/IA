@@ -7,6 +7,8 @@ using BehaviorDesigner.Runtime;
 
 namespace TeamJester
 {
+    [TaskCategory("Jester")]
+    [TaskDescription("Find Closer waypoint && next waypoint")]
     public class FindWaypoints : Action
     {
         public SharedVector2 target;
