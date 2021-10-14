@@ -14,15 +14,12 @@ namespace TeamJester
         }
         public override TaskStatus OnUpdate()
         {
-            Debug.Log("bomba");
             if (controller._spaceShip.Energy >= controller._spaceShip.MineEnergyCost)
             {
-                Debug.Log("gogogo");
-
                 controller.nextInputData.dropMine = true;
                 return TaskStatus.Success;
             }
-            return TaskStatus.Running;
+            return TaskStatus.Failure;
         }
 
     }

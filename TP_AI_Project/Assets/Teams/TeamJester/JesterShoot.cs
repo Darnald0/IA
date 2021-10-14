@@ -1,4 +1,5 @@
 using BehaviorDesigner.Runtime.Tasks;
+using UnityEngine;
 
 namespace TeamJester
 {
@@ -7,20 +8,25 @@ namespace TeamJester
     public class JesterShoot : Action
     {
         public JesterController controller;
-
+        private LayerMask mask;
         public override void OnStart()
         {
             controller = GetComponent<JesterController>();
+            LayerMask mask = 10;
         }
 
         public override TaskStatus OnUpdate()
         {
-            if(controller._spaceShip.Energy >= controller._spaceShip.ShootEnergyCost)
+            Vector2 dir = controller._spaceShip.Velocity.normalized;
+            Debug.DrawRay(controller._spaceShip.PositionWorld, dir * 5, Color.red);
+
+            RaycastHit2D hit = Physics2D.Raycast(controller._spaceShip.PositionWorld, dir, 5, mask);
+            if (hit.collider != null)
             {
-                controller.nextInputData.shoot = true;
-                return TaskStatus.Success;
+               controller.nextInputData.shoot = true;
+               return TaskStatus.Success;
             }
-            return TaskStatus.Running;
+            return TaskStatus.Failure;
         }
 
     }

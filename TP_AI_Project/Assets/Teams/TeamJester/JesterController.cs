@@ -22,6 +22,7 @@ namespace TeamJester {
 		{
 			_spaceShip = spaceship;
 			tree = GetComponent<BehaviorTree>();
+
 		}
 
 		public override InputData UpdateInput(SpaceShipView spaceship, GameData data)
@@ -50,6 +51,7 @@ namespace TeamJester {
                     countWaypointsEnmyOwn++;
                 }
             }
+
             tree.SetVariableValue("EnmyWaypointsOwn", countWaypointsEnmyOwn);
             tree.SetVariableValue("WaypointsOwnEmpty", data.WayPoints.Count - (countWaypointsEnmyOwn + countWaypointsOwn));
             tree.SetVariableValue("EnmyEnergy", _otherSpaceShip.Energy);
@@ -81,7 +83,7 @@ namespace TeamJester {
             {
                 tree.SetVariableValue("PositionOnScreen", -1);
             }
-            else if (spaceship.Position.x < 3 && spaceship.Position.x > -3)
+            else if (spaceship.Position.x < 1 && spaceship.Position.x > -1)
             {
                 tree.SetVariableValue("PositionOnScreen", 0);
             }
@@ -90,10 +92,17 @@ namespace TeamJester {
                 tree.SetVariableValue("PositionOnScreen", 1);
             }
 
-            //nextInputData.dropMine = false;
-            //nextInputData.fireShockwave = false;
-            //nextInputData.shoot = false;
+            Vector2 dir = spaceship.Velocity.normalized;
+            tree.SetVariableValue("Direction", dir);
 
+            nextInputData.dropMine = (bool)tree.GetVariable("BombDrop").GetValue();
+            nextInputData.fireShockwave = (bool)tree.GetVariable("ShockWave").GetValue();
+            nextInputData.shoot = (bool)tree.GetVariable("Shoot").GetValue();
+
+            //InputData inputData = nextInputData;
+            //inputData.dropMine = (bool)tree.GetVariable("BombDrop").GetValue();
+            //inputData.fireShockwave = false;
+            //inputData.shoot = false;
             return nextInputData;
 		}
 	}

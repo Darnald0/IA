@@ -20,7 +20,7 @@ namespace TeamJester
                 controller.nextInputData.fireShockwave = true;
                 return TaskStatus.Success;
             }
-            return TaskStatus.Running;
+            return TaskStatus.Failure;
         }
 
     }
