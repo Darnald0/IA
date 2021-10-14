@@ -16,7 +16,6 @@ namespace TeamJester {
 		public BehaviorTree tree;
 		int countWaypointsOwn;
 		int countWaypointsEnmyOwn;
-        int getWaypoint;
         bool get1Waypoint;
 
         public override void Initialize(SpaceShipView spaceship, GameData data)
@@ -62,12 +61,11 @@ namespace TeamJester {
                 tree.SetVariableValue("GetWaypoint", false);
                 get1Waypoint = false;
             }
-            if (getWaypoint <= countWaypointsOwn)
+            if (countWaypointsOwn > (int)tree.GetVariable("WaypointsOwn").GetValue())
             {
                 tree.SetVariableValue("GetWaypoint", true);
                 get1Waypoint = true;
             }
-            getWaypoint = countWaypointsOwn;
 
             tree.SetVariableValue("WaypointsOwn", countWaypointsOwn);
 
@@ -85,11 +83,11 @@ namespace TeamJester {
             {
                 tree.SetVariableValue("PositionOnScreen", -1);
             }
-            else if (spaceship.Position.x > 3)
+            else if (spaceship.Position.x < 3 && spaceship.Position.x > -3)
             {
                 tree.SetVariableValue("PositionOnScreen", 0);
             }
-            else
+            else if(spaceship.Position.x > 3)
             {
                 tree.SetVariableValue("PositionOnScreen", 1);
             }
