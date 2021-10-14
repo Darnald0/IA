@@ -35,10 +35,12 @@ namespace TeamJester
      
         void RayLook()
         {
-            Debug.Log("j'esite");
+            
             if (controller == null || controller._spaceShip == null) return;
+            Debug.Log("j'esite");
             for (int i = 0; i < nb_Raycast; i++)
             {
+                Debug.Log("j'esite");
                 Vector2 dir = controller._spaceShip.Velocity.normalized;
                 Quaternion Rot = Quaternion.Euler(0, 0, max_angle * i / (nb_Raycast - 1));
                 dir = Rot * dir;
