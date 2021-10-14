@@ -2,6 +2,8 @@ using BehaviorDesigner.Runtime.Tasks;
 
 namespace TeamJester
 {
+    [TaskCategory("Jester")]
+
     public class JesterShockWave : Action
     {
 

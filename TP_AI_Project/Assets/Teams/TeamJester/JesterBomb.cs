@@ -2,6 +2,7 @@ using BehaviorDesigner.Runtime.Tasks;
 
 namespace TeamJester
 {
+    [TaskCategory("Jester")]
     public class JesterBomb : Action
     {
 
