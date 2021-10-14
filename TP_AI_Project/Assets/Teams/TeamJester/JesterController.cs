@@ -34,6 +34,8 @@ namespace TeamJester {
 
             tree.SetVariable("DistanceToEnmy", (SharedFloat)Vector2.Distance(spaceship.Position, otherSpaceship.Position));
             tree.SetVariable("GameTime", (SharedInt)data.timeLeft);
+			tree.SetVariable(("Energy"), (SharedFloat)spaceship.Energy);
+			tree.SetVariable("ShockWaveDistance", (SharedFloat)Vector2.Distance(spaceship.Position, new Vector2((float)(otherSpaceship.Position.x - 2.2), (float)(otherSpaceship.Position.y - 2.2))));
             countWaypointsOwn = 0;
             for (int i = 0; i < data.WayPoints.Count; i++)
             {

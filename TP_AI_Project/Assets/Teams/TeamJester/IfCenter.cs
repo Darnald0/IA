@@ -11,6 +11,7 @@ namespace TeamJester
 
         public override TaskStatus OnUpdate()
         {
+
             shipPos = controller._spaceShip.Position;
             if (shipPos.x <= 0.1f && shipPos.x >= -0.1f )
             {
