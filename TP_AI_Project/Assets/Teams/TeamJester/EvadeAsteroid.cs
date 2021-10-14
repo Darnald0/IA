@@ -10,8 +10,8 @@ namespace TeamJester
     {
         public int nb_Raycast;
         public int max_angle;
-        public RaycastHit2D[] raycastHit2DsRight = new RaycastHit2D[100];
-        public RaycastHit2D[] raycastHit2DsLeft = new RaycastHit2D[100];
+        public RaycastHit2D[] raycastHit2DsRight = new RaycastHit2D[10];
+        public RaycastHit2D[] raycastHit2DsLeft = new RaycastHit2D[10];
         public float RaycastLenght = 2;
 
         [SerializeField] private LayerMask layerMask;
@@ -37,7 +37,7 @@ namespace TeamJester
         {
             
             if (controller == null || controller._spaceShip == null) return;
-            Debug.Log("j'esite");
+
             for (int i = 0; i < nb_Raycast; i++)
             {
                 Debug.Log("j'esite");
