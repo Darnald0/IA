@@ -9,31 +9,36 @@ namespace TeamJester
 {
     public class ManageThrust : Action
     {
+        public JesterController controller;
+        float _thrust;
+        public override void OnAwake()
+        {
+            base.OnAwake();
+            controller = GetComponent<JesterController>();
+        }
 
         public override void OnStart()
         {
-            GoToTarget(JesterController.instance._spaceShip, JesterController.instance._data);
+            Thrust(controller._spaceShip,controller._data);
         }
 
         public override TaskStatus OnUpdate()
         {
-            if ((float)JesterController.instance.tree.GetVariable("distanceStop").GetValue() < Vector2.Distance(JesterController.instance._spaceShip.Position, new Vector2(0, 0)))
                 return TaskStatus.Success;
+        }
+        public void Thrust(SpaceShipView spaceship, GameData data)
+        {
+            if (Vector2.Distance(spaceship.Position, (Vector2)controller.tree.GetVariable("Target").GetValue()) < 1.6f && 
+                (Vector2.SignedAngle(spaceship.Velocity, (Vector2)controller.tree.GetVariable("Target").GetValue() - spaceship.Position)*1.2f<40 && Vector2.SignedAngle(spaceship.Velocity, (Vector2)controller.tree.GetVariable("Target").GetValue() - spaceship.Position)*1.2f>-40) &&
+                ((spaceship.Velocity.x > 0.9f || spaceship.Velocity.x <-0.9f) || (spaceship.Velocity.y > 0.9f || spaceship.Velocity.y <-0.9f)))
+            {
+                _thrust = 0;
+            }
             else
             {
-                return TaskStatus.Running;
+                _thrust = 1;
             }
-        }
-        public void GoToTarget(SpaceShipView spaceship, GameData data)
-        {
-            float deltaAngle = Vector2.SignedAngle(spaceship.Velocity, (Vector2)JesterController.instance.tree.GetVariable("Target").GetValue() - spaceship.Position);
-            deltaAngle *= 1.2f;
-            deltaAngle = Mathf.Clamp(deltaAngle, -170, 170);
-            float velocityOrientation = Vector2.SignedAngle(Vector2.right, spaceship.Velocity);
-            float finalOrientation = velocityOrientation + deltaAngle;
-
-            JesterController.instance.nextInputData.targetOrientation = finalOrientation;
-            JesterController.instance.nextInputData.thrust = 1.0f;
+            controller.nextInputData.thrust = _thrust;
         }
     }
 }
