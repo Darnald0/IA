@@ -13,6 +13,9 @@ namespace DoNotModify
 		public Vector2 Velocity { get { return _spaceship.Velocity; } }
 		public float SpeedMax { get { return _spaceship.SpeedMax; } }
 		public Vector2 Position { get { return (Vector2)(_spaceship.Position); } }
+
+		public Vector3 PositionWorld { get { return (Vector2)(_spaceship.transform.position); } }
+
 		public float Orientation { get { return _spaceship.Orientation; } }
 		public float Radius { get { return _spaceship.Radius; } }
 		public float HitCountdown { get { return _spaceship.HitCountdown; } }
