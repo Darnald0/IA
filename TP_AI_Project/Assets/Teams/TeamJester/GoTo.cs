@@ -10,31 +10,31 @@ namespace TeamJester
     public class GoTo : Action
     {
         public SharedFloat distanceStop;
+        public JesterController controller;
+        public override void OnAwake()
+        {
+            base.OnAwake();
+            controller = GetComponent<JesterController>();
+        }
 
         public override void OnStart()
         {
-            GoToTarget(JesterController.instance._spaceShip, JesterController.instance._data);
+            GoToTarget(controller._spaceShip, controller._data);
         }
 
         public override TaskStatus OnUpdate()
         {
-            if (distanceStop.Value < Vector2.Distance(JesterController.instance._spaceShip.Position, new Vector2(0, 0)))
-                return TaskStatus.Success;
-            else
-            {
-                return TaskStatus.Running;
-            }
+            return TaskStatus.Success;
         }
         public void GoToTarget(SpaceShipView spaceship, GameData data)
         {
-            float deltaAngle = Vector2.SignedAngle(spaceship.Velocity, (Vector2)JesterController.instance.tree.GetVariable("Target").GetValue() - spaceship.Position);
-            deltaAngle *= 1.2f;
+            float deltaAngle = Vector2.SignedAngle(spaceship.Velocity, (Vector2)controller.tree.GetVariable("NextTarget").GetValue() - spaceship.Position);
+            deltaAngle *= 1.5f;
             deltaAngle = Mathf.Clamp(deltaAngle, -170, 170);
             float velocityOrientation = Vector2.SignedAngle(Vector2.right, spaceship.Velocity);
             float finalOrientation = velocityOrientation + deltaAngle;
 
-            JesterController.instance.nextInputData.targetOrientation = finalOrientation;
-            JesterController.instance.nextInputData.thrust = 1.0f;
+            controller.nextInputData.targetOrientation = finalOrientation;
         }
     }
 }
