@@ -45,7 +45,7 @@ namespace TeamJester
                 controller.tree.SetVariable("Target", saveWaypoints);
                 controller.tree.SetVariable("NextTarget", saveWaypoints);
             }
-            else if(controller.nextInputData.thrust == 0 && controller.tree.GetVariable("Target") != null)
+            else if (controller.nextInputData.thrust == 0 && controller.tree.GetVariable("Target") != null)
             {
                 closeWaypoints = Vector2.Distance((Vector2)controller.tree.GetVariable("Target").GetValue(), new Vector2(1000, 1000));
                 for (int i = 0; i < data.WayPoints.Count; i++)

@@ -7,7 +7,7 @@ using BehaviorDesigner.Runtime;
 
 namespace TeamJester
 {
-    public class GoTo : Action
+    public class LookAt : Action
     {
         public SharedFloat distanceStop;
         public JesterController controller;
@@ -19,21 +19,20 @@ namespace TeamJester
 
         public override void OnStart()
         {
-            GoToTarget(controller._spaceShip, controller._data);
+            Look(controller._spaceShip, controller._data);
         }
 
         public override TaskStatus OnUpdate()
         {
             return TaskStatus.Success;
         }
-        public void GoToTarget(SpaceShipView spaceship, GameData data)
+        public void Look(SpaceShipView spaceship, GameData data)
         {
             float deltaAngle = Vector2.SignedAngle(spaceship.Velocity, (Vector2)controller.tree.GetVariable("NextTarget").GetValue() - spaceship.Position);
             deltaAngle *= 1.5f;
             deltaAngle = Mathf.Clamp(deltaAngle, -170, 170);
             float velocityOrientation = Vector2.SignedAngle(Vector2.right, spaceship.Velocity);
             float finalOrientation = velocityOrientation + deltaAngle;
-
             controller.nextInputData.targetOrientation = finalOrientation;
         }
     }
