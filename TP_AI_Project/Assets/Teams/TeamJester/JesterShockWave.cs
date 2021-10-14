@@ -6,12 +6,12 @@ namespace TeamJester
 
     public class JesterShockWave : Action
     {
-
+        public JesterController controller;
         public override TaskStatus OnUpdate()
         {
-            if (JesterController.instance._spaceShip.Energy >= JesterController.instance._spaceShip.ShockwaveEnergyCost)
+            if (controller._spaceShip.Energy >= controller._spaceShip.ShockwaveEnergyCost)
             {
-                JesterController.instance.nextInputData.fireShockwave = true;
+                controller.nextInputData.fireShockwave = true;
                 return TaskStatus.Success;
             }
             return TaskStatus.Running;

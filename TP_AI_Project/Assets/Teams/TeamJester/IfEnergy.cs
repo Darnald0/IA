@@ -6,12 +6,13 @@ namespace TeamJester
     [TaskCategory("Jester")]
     public class IfEnergy : Conditional
     {
+        public JesterController controller;
         public float IfRemainingEnergyPercent;
         private float currentEnergyPercent;
 
         public override void OnStart()
         {
-            IfRemainingEnergyPercent = (float)JesterController.instance.tree.GetVariable("IfRemainingEnergyPercent").GetValue();
+            IfRemainingEnergyPercent = (float)controller.tree.GetVariable("IfRemainingEnergyPercent").GetValue();
             Debug.Log(IfRemainingEnergyPercent);
         }
         public override TaskStatus OnUpdate()
@@ -29,7 +30,7 @@ namespace TeamJester
 
         public float ConvertEnergy()
         {
-            currentEnergyPercent = JesterController.instance._spaceShip.Energy / 1 * 100;
+            currentEnergyPercent = controller._spaceShip.Energy / 1 * 100;
             return currentEnergyPercent;
         }
     }

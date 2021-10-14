@@ -6,12 +6,12 @@ namespace TeamJester
 
     public class JesterShoot : Action
     {
-
+        public JesterController controller;
         public override TaskStatus OnUpdate()
         {
-            if(JesterController.instance._spaceShip.Energy >= JesterController.instance._spaceShip.ShootEnergyCost)
+            if(controller._spaceShip.Energy >= controller._spaceShip.ShootEnergyCost)
             {
-                JesterController.instance.nextInputData.shoot = true;
+                controller.nextInputData.shoot = true;
                 return TaskStatus.Success;
             }
             return TaskStatus.Running;
