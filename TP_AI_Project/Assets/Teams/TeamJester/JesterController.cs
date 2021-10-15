@@ -30,13 +30,12 @@ namespace TeamJester {
 			_data = data;
             _otherSpaceShip = data.GetSpaceShipForOwner(1 - spaceship.Owner);
 
-
-
             tree.SetVariable("DistanceToEnmy", (SharedFloat)Vector2.Distance(spaceship.Position, _otherSpaceShip.Position));
             tree.SetVariable("GameTime", (SharedInt)data.timeLeft);
 			tree.SetVariable(("Energy"), (SharedFloat)spaceship.Energy);
 			tree.SetVariable("ShockWaveDistance", (SharedFloat)Vector2.Distance(spaceship.Position, new Vector2((float)(_otherSpaceShip.Position.x - 2.2), (float)(_otherSpaceShip.Position.y - 2.2))));
             countWaypointsOwn = 0;
+            countWaypointsEnmyOwn = 0;
             for (int i = 0; i < data.WayPoints.Count; i++)
             {
                 if (data.WayPoints[i].Owner == spaceship.Owner)
@@ -79,7 +78,7 @@ namespace TeamJester {
             }
             tree.SetVariableValue("DistanceToTarget", Vector2.Distance(spaceship.Position, (Vector2)tree.GetVariable("Target").GetValue()));
 
-            if (spaceship.Position.x < -3)
+            if (spaceship.Position.x < -1)
             {
                 tree.SetVariableValue("PositionOnScreen", -1);
             }
@@ -87,7 +86,7 @@ namespace TeamJester {
             {
                 tree.SetVariableValue("PositionOnScreen", 0);
             }
-            else if(spaceship.Position.x > 3)
+            else if(spaceship.Position.x > 1)
             {
                 tree.SetVariableValue("PositionOnScreen", 1);
             }

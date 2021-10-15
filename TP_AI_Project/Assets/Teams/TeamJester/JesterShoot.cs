@@ -19,6 +19,7 @@ namespace TeamJester
         {
             Vector2 dir = controller._spaceShip.Velocity.normalized;
             Debug.DrawRay(controller._spaceShip.PositionWorld, dir * 5, Color.red);
+            mask = LayerMask.GetMask("Player");
 
             RaycastHit2D hit = Physics2D.Raycast(controller._spaceShip.PositionWorld, dir, 5, mask);
             if (hit.collider != null)
