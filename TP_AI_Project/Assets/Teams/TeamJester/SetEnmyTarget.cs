@@ -20,7 +20,7 @@ namespace TeamJester
 
         public override void OnStart()
         {
-            controller.tree.SetVariableValue("Target", controller._otherSpaceShip);
+            controller.tree.SetVariableValue("Target", controller._otherSpaceShip.Position);
         }
 
         public override TaskStatus OnUpdate()
