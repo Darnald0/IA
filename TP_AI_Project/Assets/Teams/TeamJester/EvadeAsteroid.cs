@@ -72,15 +72,20 @@ namespace TeamJester
                     Debug.DrawRay(controller._spaceShip.PositionWorld, dir, Color.yellow);
                     Debug.Log("detecte l'asteroid a droite");
                     // se deplace a gauche
-                    if (raycastHit2DsRight[0].collider == null && raycastHit2DsLeft[0].collider == null)
-                    {
-                        controller.tree.SetVariable("Target", (SharedVector2)controller._spaceShip.Velocity.normalized);
-                    }
-                    else if(raycastHit2DsRight[i].collider == null && i != 0)
+                    //if (raycastHit2DsRight[0].collider == null && raycastHit2DsLeft[0].collider == null)
+                    //{
+                    //    Vector2 dirleft = controller._spaceShip.Velocity.normalized;
+                    //    Quaternion Rotleft = Quaternion.Euler(0, 0, -(max_angle * i / (nb_Raycast - 1)));
+                    //    dirleft = Rotleft * dirleft;
+                    //    Debug.DrawRay(controller._spaceShip.PositionWorld, dirleft, Color.red);
+                    //    controller.tree.SetVariable("Target", (SharedVector2)dirleft);
+                    //}
+                    if(raycastHit2DsRight[i].collider != null && i != 0)
                     {
                         Vector2 dirleft = controller._spaceShip.Velocity.normalized;
                         Quaternion Rotleft = Quaternion.Euler(0, 0, -(max_angle * i / (nb_Raycast - 1)));
                         dirleft = Rotleft * dirleft;
+                        Debug.DrawRay(controller._spaceShip.PositionWorld, dirleft, Color.red);
                         controller.tree.SetVariable("Target", (SharedVector2)dirleft);
                     }
 
@@ -94,15 +99,20 @@ namespace TeamJester
                     Debug.DrawRay(controller._spaceShip.PositionWorld, dir, Color.yellow);
                     Debug.Log("detecte l'asteroid a gauche");
                     // se deplace a droite 
-                    if (raycastHit2DsRight[0].collider == null && raycastHit2DsLeft[0].collider == null)
-                    {
-                        controller.tree.SetVariable("Target", (SharedVector2)dir);
-                    }
-                    else if (raycastHit2DsLeft[i].collider == null && i != 0)
+                    //if (raycastHit2DsRight[0].collider == null && raycastHit2DsLeft[0].collider == null)
+                    //{
+                    //    Vector2 dirRight = controller._spaceShip.Velocity.normalized;
+                    //    Quaternion RotRight = Quaternion.Euler(0, 0, max_angle * i / (nb_Raycast - 1));
+                    //    dirRight = RotRight * dirRight;
+                    //    Debug.DrawRay(controller._spaceShip.PositionWorld, dirRight, Color.red);
+                    //    controller.tree.SetVariable("Target", (SharedVector2)dirRight);
+                    //}
+                    if (raycastHit2DsLeft[i].collider != null && i != 0)
                     {
                         Vector2 dirRight = controller._spaceShip.Velocity.normalized;
                         Quaternion RotRight = Quaternion.Euler(0, 0, max_angle * i / (nb_Raycast - 1));
                         dirRight = RotRight * dirRight;
+                        Debug.DrawRay(controller._spaceShip.PositionWorld, dirRight, Color.red);
                         controller.tree.SetVariable("Target", (SharedVector2)dirRight);
                     }
                 }
